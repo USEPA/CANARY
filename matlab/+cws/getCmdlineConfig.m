@@ -1,0 +1,33 @@
+function config = getCmdlineConfig( )
+  config = struct();
+  config.V = { 'version', 'store_true', false };
+  config.version = { 'version', 'store_true', false };
+  config.convert = { 'convert', 'store_true', false };
+  config.clusterize = {'clusterize', 'store_true', false };
+  config.combine = {'combine', 'store_true', false };
+  config.d = {'debug', 'count', 0};
+  config.debug = {'debug', 'count', 0};
+  config.v = {'debug', 'count', 0};
+  config.verbose = {'debug', 'count', 0};
+  config.i = {'interactive', 'store_true', false};
+  config.interactive = {'interactive', 'store_true', false};
+  config.c = {'configfile', 'store', ''};
+  config.configfile = {'configfile', 'store', ''};
+  config.l = {'logfile', 'store', ''};
+  config.logfile = {'logfile', 'store', ''};
+  config.keepalive = {'daemonize', 'store_true', false};
+  config.daemonize = {'daemonize', 'store_true', false};
+  config.server = {'daemonize', 'store_true', false};
+  config.h = {'help', 'store_true', false};
+  config.help = {'help', 'store_true', false};
+  config.restart = {'restart', 'store_true', false};
+  config.r = {'restart', 'store_true', false};
+  config.eddies = {'eddies', 'store_true', false};
+  config.e = {'eddies', 'store_true', false};
+  config.graph = {'graph', 'store_true', false};
+  config.patterns = {'pattern_editor', 'store_true', false};
+  config.printcluster = {'print_cluster', 'store_true', false};
+  config.datadir = {'datadir', 'store', ''};
+  config.continue = {'continue', 'store_true', false};
+  
+  

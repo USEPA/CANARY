@@ -3,3 +3,5 @@ The CANARY-EDS (Continuous Analysis of Networked Array of Sensors for Event Dete
 
 The community web pages are located at http://community.wateranalytics.org/
 
+The M-code is licensed as LGPL 2.1.
+The Java code is license as Apache License 2.0.

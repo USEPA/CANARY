@@ -1,0 +1,82 @@
+USE AT YOUR OWN RISK
+
+This contains preliminary development of a java version of the canary software, ported from the 4.3.3 MATLAB codebase in the root directory. This code can be used under the 
+following license or the Apache License 2.0
+
+%CANARY: Water Quality Event Detection Algorithm Test & Evaluation Tool
+%
+% Copyright 2007-2012 Sandia Corporation.
+% This source code is distributed under the LGPL License.
+% Under the terms of Contract DE-AC04-94AL85000 with Sandia Corporation,
+% the U.S. Government retains certain rights in this software.
+%
+% This library is free software; you can redistribute it and/or modify it
+% under the terms of the GNU Lesser General Public License as published by
+% the Free Software Foundation; either version 2.1 of the License, or (at
+% your option) any later version. This library is distributed in the hope
+% that it will be useful, but WITHOUT ANY WARRANTY; without even the
+% implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+% See the GNU Lesser General Public License for more details.
+%
+% You should have received a copy of the GNU Lesser General Public License
+% along with this library; if not, write to the Free Software Foundation,
+% Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+%
+% CANARY is a software package that allows developers to test different
+% algorithms and settings on both off- and on-line water-quality data sets.
+% Data can come from database or text file sources.
+%
+% This software was written as part of an Inter-Agency Agreement between
+% Sandia National Laboratories and the US EPA NHSRC.
+
+
+
+**************
+
+The following directory structure exists for the CANARYEDS repository
+
+Files:
+pom.xml		     - Contains the parent POM for CANARYEDS modules
+pom-modules.xml      - Contains a POM to build different modules for unified Javadocs
+
+Directories/Modules:
+canary-core-old/     - Contains the v4 CanarysCore.jar source code
+canareds-base/       - Contains the base CANARYEDS _library_ functionality
+canaryeds-program/   - Contains the GUI and command line executable files module
+canaryeds-external*/ - Contains specific drivers for different middleware (future work)
+canaryeds-builder/   - Contains a configuration file builder program
+canaryeds-pom/       - Contains only the parent POM, for continuous integration builder
+examples/            - Contains example configuration and data files for CANARYEDS 5
+
+Externals:
+seme-framework-1.0/  - Contains the Seme Framework 1.0 release source code
+
+To build CANARYEDS:
+
+1. Build the Seme Framework, or install the Jar for seme-framework-1.0.jar into your local maven repo
+   > cd seme-framework-1.0
+   > mvn clean compile install
+
+2. Install the org.canaryeds::gov-sandia-canaryeds parent POM in your local maven repo
+   > cd canaryeds-pom
+   > mvn install
+
+3. Build the canaryeds-base module to get the library functions
+   > cd canaryeds-base
+   > mvn clean compile install
+
+Doing the three above will give access to the following packages:
+ - gov.sandia.seme.framework
+ - gov.sandia.seme.util
+ - org.canaryeds.base
+ - org.canaryeds.base.*
+
+The canaryeds-program module has the following dependencies:
+ - seme-framework-1.0
+ - canaryeds-base
+ - canary-core-old
+ - canaryeds-external-eddies (empty jar at this time)
+
+The canaryeds-program/src/main/java/gov/sandia/canaryeds/program/CanaryEDS.java file contains the commandline routine which shows how to use CANARYEDS as a library, assuming that the routine calling CANARY does not exit from main :-)
+
+The seme-framework-1.0 tests _should_ all be passing!

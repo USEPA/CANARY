@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright 2014 Sandia Corporation.
+Under the terms of Contract DE-AC04-94AL85000 with Sandia Corporation, the U.S.
+Government retains certain rights in this software.
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+This software was written as part of an Inter-Agency Agreement between Sandia
+National Laboratories and the US EPA NHSRC.
+-->
+
+<project name="CANARY-EDS" default="default" basedir=".">
+    <description>Builds, tests, and runs the project CANARY-EDS.</description>
+    
+  <!-- The name of this component -->
+  <property name="component.name"          value="CANARY-EDS"/>
+
+  <!-- The primary package name of this component -->
+  <property name="component.package"       value="canaryeds"/>
+
+  <!-- The title of this component -->
+  <property name="component.title"         value="CANARY-EDS"/>
+
+  <!-- The current version number of this component -->
+  <property name="component.version"       value="5.0-SNAPSHOT"/>
+
+    
+    
+    <!-- ========== Download Dependencies =========================================== -->
+
+  <!-- Download lib dir -->
+  <property name="download.lib.dir"        value="lib"/>
+
+  <!-- Junit -->
+  <property name="junit.version"           value="4.11"/>
+  <property name="junit.home"              value="${download.lib.dir}"/>
+  <property name="junit.jar"               value="${junit.home}/junit-${junit.version}.jar"/>
+  <!-- SnakeYAML -->
+  <property name="snakeyaml.version"       value="1.11"/>
+  <property name="snakeyaml.home"          value="${download.lib.dir}"/>
+  <property name="snakeyaml.jar"           value="${snakeyaml.home}/snakeyaml-${snakeyaml.version}.jar"/>
+  <!-- JSON-Simple -->
+  <property name="json-simple.version"     value="1.1.1"/>
+  <property name="json-simple.home"        value="${download.lib.dir}"/>
+  <property name="json-simple.jar"         value="${json-simple.home}/json-simple-${json-simple.version}.jar"/>
+  <!-- SnakeYAML -->
+  <property name="commons-math3.version"   value="3.2"/>
+  <property name="commons-math3.home"      value="${download.lib.dir}"/>
+  <property name="commons-math3.jar"       value="${commons-math3.home}/commons-math3-${commons-math3.version}.jar"/>
+  
+
+    <target name="-pre-compile" 
+           depends="check-availability" unless="skip.download">
+        <echo message="doing download-dependencies..." />
+        <antcall target="download-junit" />
+        <antcall target="download-snakeyaml" />
+        <antcall target="download-json-simple" />
+        <antcall target="download-commons-math3" />
+    </target>
+
+    <target name="check-availability">
+        <echo message="doing check-availability..." />
+        <available file="${junit.jar}" property="junit.found"/>
+        <available file="${snakeyaml.jar}" property="snakeyaml.found"/>
+        <available file="${json-simple.jar}" property="json-simple.found"/>
+        <available file="${commons-math3.jar}" property="commons-math3.found"/>
+    </target>
+
+    <target name="download-junit" unless="junit.found">
+        <echo message="Downloading junit..."/>
+        <mkdir dir="${download.lib.dir}" />
+        <get dest="${download.lib.dir}/junit-${junit.version}.jar"
+            usetimestamp="true" ignoreerrors="true"
+            src="http://repo1.maven.org/maven2/junit/junit/${junit.version}/junit-${junit.version}.jar"/>
+    </target>
+    <target name="download-snakeyaml" unless="snakeyaml.found">
+        <echo message="Downloading snakeyaml..."/>
+        <mkdir dir="${download.lib.dir}" />
+        <get dest="${download.lib.dir}/snakeyaml-${snakeyaml.version}.jar"
+            usetimestamp="true" ignoreerrors="true"
+            src="http://repo1.maven.org/maven2/org/yaml/snakeyaml/${snakeyaml.version}/snakeyaml-${snakeyaml.version}.jar"/>
+    </target>
+    <target name="download-json-simple" unless="json-simple.found">
+        <echo message="Downloading json-simple..."/>
+        <mkdir dir="${download.lib.dir}" />
+        <get dest="${download.lib.dir}/json-simple-${json-simple.version}.jar"
+            usetimestamp="true" ignoreerrors="true"
+            src="http://json-simple.googlecode.com/files/json-simple-${json-simple.version}.jar"/>
+    </target>
+    <target name="download-commons-math3" unless="commons-math3.found">
+        <echo message="Downloading commons-math3..."/>
+        <mkdir dir="${download.lib.dir}" />
+        <get dest="${download.lib.dir}/commons-math3-${commons-math3.version}.jar"
+            usetimestamp="true" ignoreerrors="true"
+            src="http://repo1.maven.org/maven2/org/apache/commons/commons-math3/${commons-math3.version}/commons-math3-${commons-math3.version}.jar"/>
+    </target>
+
+    <target name="-pre-jar">
+    <copy file="LICENSE.txt" tofile="${build.dir}/classes/META-INF/LICENSE.txt"/>
+    <copy file="NOTICE.txt"  tofile="${build.dir}/classes/META-INF/NOTICE.txt"/>
+
+    <manifest file="manifest.mf">
+        <attribute name="Specification-Title"      value="${component.title}"/>
+        <attribute name="Specification-Version"    value="${component.version}"/>
+        <attribute name="Specification-Vendor"     value="Sandia National Laboratories"/>
+        <attribute name="Implementation-Title"     value="${component.title}"/>
+        <attribute name="Implementation-Version"   value="${component.version}"/> 
+        <attribute name="Implementation-Vendor"    value="Sandia National Laboratories"/>
+        <attribute name="Implementation-Vendor-Id" value="org.canaryeds"/>
+    </manifest>
+    </target>
+    <import file="nbproject/build-impl.xml"/>
+    <import file="nbproject/management-build-impl.xml"/>
+    <!--
+
+    There exist several targets which are by default empty and which can be 
+    used for execution of your tasks. These targets are usually executed 
+    before and after some main targets. They are: 
+
+      -pre-init:                 called before initialization of project properties
+      -post-init:                called after initialization of project properties
+      -pre-compile:              called before javac compilation
+      -post-compile:             called after javac compilation
+      -pre-compile-single:       called before javac compilation of single file
+      -post-compile-single:      called after javac compilation of single file
+      -pre-compile-test:         called before javac compilation of JUnit tests
+      -post-compile-test:        called after javac compilation of JUnit tests
+      -pre-compile-test-single:  called before javac compilation of single JUnit test
+      -post-compile-test-single: called after javac compilation of single JUunit test
+      -pre-jar:                  called before JAR building
+      -post-jar:                 called after JAR building
+      -post-clean:               called after cleaning build products
+
+    (Targets beginning with '-' are not intended to be called on their own.)
+
+    Example of inserting an obfuscator after compilation could look like this:
+
+        <target name="-post-compile">
+            <obfuscate>
+                <fileset dir="${build.classes.dir}"/>
+            </obfuscate>
+        </target>
+
+    For list of available properties check the imported 
+    nbproject/build-impl.xml file. 
+
+
+    Another way to customize the build is by overriding existing main targets.
+    The targets of interest are: 
+
+      -init-macrodef-javac:     defines macro for javac compilation
+      -init-macrodef-junit:     defines macro for junit execution
+      -init-macrodef-debug:     defines macro for class debugging
+      -init-macrodef-java:      defines macro for class execution
+      -do-jar-with-manifest:    JAR building (if you are using a manifest)
+      -do-jar-without-manifest: JAR building (if you are not using a manifest)
+      run:                      execution of project 
+      -javadoc-build:           Javadoc generation
+      test-report:              JUnit report generation
+
+    An example of overriding the target for project execution could look like this:
+
+        <target name="run" depends="CANARY-EDS-impl.jar">
+            <exec dir="bin" executable="launcher.exe">
+                <arg file="${dist.jar}"/>
+            </exec>
+        </target>
+
+    Notice that the overridden target depends on the jar target and not only on 
+    the compile target as the regular run target does. Again, for a list of available 
+    properties which you can use, check the target you are overriding in the
+    nbproject/build-impl.xml file. 
+
+    -->
+</project>
+

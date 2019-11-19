@@ -1,0 +1,46 @@
+/**
+\if (doxyCanaryMain && doxyUser)
+
+\mainpage Introduction
+
+\htmlonly
+\image html logo_halfsize.jpg
+\author David B. Hart, Nathanael P. Rackley
+\tableofcontents
+\endhtmlonly
+
+This document provides a User Reference Guide for CANARY-EDS 5.0
+
+To learn about the differences between the version 4.3 and 5.0 configuration
+file formats, please see the chapter \ref userConvert. A configuration-file 
+generator is available on the
+CANARY-EDS website. This utility can create version 4.3 compatible or version 5
+native format configuration files from a text file containing water quality data.
+This utility is discussed in more detail in \ref userBuildConfig.
+
+The new configuration file is discussed in the chapter \ref userConfigfile. Each 
+CANARY-EDS component's configuration is discussed in its own section of the
+chapter \ref userConfigDetails.
+
+This Reference Guide covers how to configure and run CANARY-EDS. For information
+on how to extend and develop for %CANARY, please see the 
+<a href="../html-dev/index.html">Developer Guide</a>.
+
+Additional resources include:
+
+\li The original User's Manual for CANARY version 4.3.2 \cite epa2012 is still
+    current, with CANARY-EDS 5.0 being backward compatible and able to read
+    version 4.3 configuration files.
+
+\li The CANARY Quick-Start Guide \cite quickStart provides information on how
+    to get CANARY-EDS 4.3 up and running. A similar guide is in progress for 
+    the new CANARY-EDS 5.0.
+
+\li The CANARY-EDS tutorials are available online
+
+\li Project web pages are maintained at http://software.sandia.gov/trac/canary
+    including links to frequently asked questions, documentation, publications,
+	mailing lists, and other resources.
+
+\endif
+*/

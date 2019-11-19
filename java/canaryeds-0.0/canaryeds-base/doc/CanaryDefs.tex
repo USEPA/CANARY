@@ -1,0 +1,96 @@
+% Shortcuts for Canary information incorporated in multiple versions of manuals
+%
+% This file is includeded in all top-level .tex files
+
+% When using this command, likely follow with a forced space, e.g., one of
+% Version \CanaryVersion\ Manual
+% Version \CanaryVersion\space Manual
+% Version \CanaryVersion{} Manual
+\newcommand{\CanaryVersion}{5.0}
+%%\newcommand{\CanaryVersion}{5.0+}
+
+
+% Most recent SAND report numbers and report date based on
+% Data should be SAND report date and not reflect updates
+\newcommand{\CanarySANDDate}{December 2009}
+\newcommand{\CanarySANDDev}{SAND2010-2185}
+\newcommand{\CanarySANDRef}{SAND2010-2184}
+\newcommand{\CanarySANDUsers}{SAND2010-2183}
+\newcommand{\CanarySANDTheory}{SAND2011-9106}
+
+
+% Need to manually break line or Eldred gets incorrectly split
+\newcommand{\CanaryAuthorSAND}{
+David~B.~Hart, Nathanael~P.~Rackley
+}
+
+\newcommand{\CanaryAuthorLong}{
+David~B.~Hart, Nathanael~P.~Rackley\\
+Geochemistry Department\\
+\\
+Sandia National Laboratories\\
+P.O. Box 5800\\
+Albuquerque, NM 87185
+}
+
+\newcommand{\CanaryAuthorFormatted}{
+{\large \bf David B. Hart, Nathanael P. Rackley}\\ 
+{\large Geochemistry Department}\\
+\vspace*{0.5cm}
+{\large Sandia National Laboratories}\\
+{\large P.O. Box 5800}\\
+{\large Albuquerque, New Mexico 87185}\\
+}
+
+
+% Fragments which together comprise abstracts
+
+\newcommand{\CanaryAbstractShared}{
+
+% blank line intended
+
+% blank line intended
+}
+
+\newcommand{\CanaryAbstractDev}{
+This report serves as a developers manual for the Canary software and
+describes the Canary class hierarchies and their interrelationships.
+It derives directly from annotation of the source code and provides
+detailed class documentation, including all member functions and
+attributes.  
+}
+
+\newcommand{\CanaryAbstractRef}{
+This report serves as a reference manual for the commands specification
+for the Canary software, providing input overviews, option descriptions,
+and example specifications.
+}
+
+\newcommand{\CanaryAbstractUsers}{
+This report serves as a user's manual for the Canary software and
+provides capability overviews and procedures for software execution,
+as well as a variety of example studies.
+}
+
+\newcommand{\CanaryAbstractTheory}{
+This report serves as a theoretical manual for selected algorithms
+implemented within the Canary software.
+}
+
+\newcommand{\SandiaFundingStatement}{
+Sandia National Laboratories is a multi-program laboratory managed and operated by 
+Sandia Corporation, a wholly owned subsidiary of Lockheed Martin Corporation, for
+the U.S. Department of Energy’s National Nuclear Security Administration under 
+contract DE\-AC04\-94AL85000.
+}
+
+\newcommand{\CanaryAcknowledge}{
+The U.S. Environmental Protection Agency (EPA) through its Office of Research and Development
+funded and collaborated in the development of CANARY-EDS under an Inter-Agency Agreements
+with the Department of Energy's Sandia National laboratories 
+(IAG numbers DW8992192801, DW8992368101).
+
+Additionally, the authors would like to thank the following members of the EPA's National Homeland
+Security Research Center for their help in testing the new version of
+the software: Jonathan Burkhardt, John Hall, Terra Haxton, and Regan Murray.
+}

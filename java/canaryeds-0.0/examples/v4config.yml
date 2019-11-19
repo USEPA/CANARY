@@ -1,0 +1,201 @@
+--- # CANARY Config File
+
+canary:
+  run mode: BATCH
+  control type: INTERNAL
+  control messenger: null
+  driver files: null
+
+# Enter the time step options below
+timing options:
+  dynamic start-stop: off
+  date-time format: mm/dd/yyyy HH:MM:SS
+  date-time start:  02/21/2006 00:00:00
+  date-time stop:   03/06/2006 23:40:00
+  data interval: 00:20:00
+  message interval: 00:00:01
+
+# Enter the list of data sources below
+data sources:
+- id: stationb_in
+  type       : csv
+  location   : Tutorial_Station_B.csv
+  enabled    : yes
+  timestep options:
+    field: "timestep"
+- id: stationb_out
+  type       : FILE
+  location   : output_v4.csv
+  enabled    : yes
+  timestep options:
+    field: "TIME_STEP"
+
+# Enter the list of SCADA/composite signals/parameters below
+signals:
+- id: TEST_CL
+  SCADA tag: B_CL2_VAL
+  evaluation type: wq
+  parameter type: CL2
+  ignore changes: none
+  data options:
+    precision: 0.0035
+    units: 'Mg/L'
+    valid range: [-.inf, .inf]
+    set points: [-.inf, .inf]
+
+- id: TEST_COND
+  SCADA tag: B_COND_VAL
+  evaluation type: wq
+  parameter type: COND
+  ignore changes: none
+  data options:
+    precision: 1
+    units: '{\mu}S/cm'
+    valid range: [-.inf, .inf]
+    set points: [-.inf, .inf]
+
+- id: TEST_PH
+  SCADA tag: B_PH_VAL
+  evaluation type: wq
+  parameter type: PH
+  ignore changes: none
+  data options:
+    precision: 0.01
+    units: 'pH'
+    valid range: [-.inf, .inf]
+    set points: [-.inf, .inf]
+
+- id: TEST_TEMP
+  SCADA tag: B_TEMP_VAL
+  evaluation type: op
+  parameter type: TEMP
+  ignore changes: all
+  data options:
+    precision: 0.1
+    units: '^oF'
+    valid range: [32, .inf]
+    set points: [-.inf, .inf]
+
+- id: TEST_TOC
+  SCADA tag: B_TOC_VAL
+  evaluation type: wq
+  parameter type: TOC
+  ignore changes: none
+  data options:
+    precision: 0.01
+    units: 'ppb'
+    valid range: [-.inf, .inf]
+    set points: [-.inf, .inf]
+
+- id: TEST_TURB
+  SCADA tag: B_TURB_VAL
+  evaluation type: wq
+  parameter type: TURB
+  ignore changes: none
+  data options:
+    precision: 0.01
+    units: 'NTU'
+    valid range: [-.inf, .inf]
+    set points: [-.inf, .inf]
+
+- id: TEST_PRES
+  SCADA tag: B_PRES_OP
+  evaluation type: op
+  parameter type: PRES
+  ignore changes: none
+  data options:
+    precision: 0.01
+    units: 'PSI'
+    valid range: [-.inf, .inf]
+    set points: [-.inf, .inf]
+
+- id: TEST_CL_PLNT
+  SCADA tag: B_PLNT_CL2_VAL
+  evaluation type: wq
+  parameter type: CL2
+  ignore changes: none
+  data options:
+    precision: 0.0035
+    units: 'Mg/L'
+    valid range: [-.inf, .inf]
+    set points: [-.inf, .inf]
+
+- id: TEST_PH_PLNT
+  SCADA tag: B_PLNT_PH_VAL
+  evaluation type: wq
+  parameter type: PH
+  ignore changes: none
+  data options:
+    precision: 0.01
+    units: 'pH'
+    valid range: [-.inf, .inf]
+    set points: [-.inf, .inf]
+
+- id: TEST_TURB_PLNT
+  SCADA tag: B_PLNT_TURB_VAL
+  evaluation type: wq
+  parameter type: TURB
+  ignore changes: none
+  data options:
+    precision: 0.01
+    units: 'NTU'
+    valid range: [-.inf, .inf]
+    set points: [-.inf, .inf]
+
+- id: TEST_PRES_PLNT
+  SCADA tag: B_PLNT_PRES_OP
+  evaluation type: op
+  parameter type: PRES
+  ignore changes: both
+  data options:
+    precision: 0.4
+    units: 'PSI'
+    valid range: [-.inf, .inf]
+    set points: [-.inf, .inf]
+
+- id: TEST_FLOW_PLNT
+  SCADA tag: B_PLNT_FLOW_OP
+  evaluation type: op
+  parameter type: FLOW
+  ignore changes: both
+  data options:
+    precision: 0.05
+    units: 'gpm'
+    valid range: [-.inf, .inf]
+    set points: [-.inf, .inf]
+
+
+# Enter the list of event detection algorithms below
+algorithms: 
+- id: test
+  type: MVNN
+  history window: 144
+  outlier threshold: 0.8
+  event threshold: 0.85
+  event timeout: 12
+  event window save: 30
+  BED:
+    window: 6
+    outlier probability: 0.5
+
+
+# Enter the list of monitoring stations below
+monitoring stations:
+- id: StationB
+  station id number: 
+  station tag name: StationB
+  location id number: -1
+  enabled: yes
+  inputs:
+    - id: stationb_in
+  outputs:
+    - id: stationb_out
+  signals:
+    - id: TEST_CL
+    - id: TEST_PH
+    - id: TEST_TEMP
+    - id: TEST_TURB
+    - id: TEST_TOC
+  algorithms:
+    - id: test
+

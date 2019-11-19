@@ -1,0 +1,30 @@
+
+    \nocite{*}
+
+    \appendix
+
+    % ---------------------------------------------------------------------- %
+    % References
+    %
+    \cleardoublepage
+    \fancyhead[RE]{\fancyplain{}{\bfseries References}}
+    \fancyhead[LO]{\fancyplain{}{\bfseries }}
+    % If hyperref is included, then \phantomsection is already defined.
+    % If not, we need to define it.
+    \providecommand*{\phantomsection}{}
+    \phantomsection
+    \addcontentsline{toc}{chapter}{References}
+    \bibliographystyle{plain}
+    \bibliography{references}
+
+    % ---------------------------------------------------------------------- %
+    %
+    \cleardoublepage
+    \fancyhead[RE]{\fancyplain{}{\bfseries Index}}
+    \fancyhead[LO]{\fancyplain{}{\bfseries }}
+    \addcontentsline{toc}{chapter}{Index}
+    \printindex
+
+    \include{SANDdistribution}
+
+\end{document}

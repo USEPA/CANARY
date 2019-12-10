@@ -1,0 +1,113 @@
+controllers:
+  canary-eds:
+    controllers.Batch: {stepDynamic: false, stepSize: '00:05:00', stepFinal: '2008-01-10 23:55:00',
+      pollRate: '00:01:00', globalStepFormat: 'yyyy-MM-dd HH:mm:ss',
+      globalDataStyle: null, stepType: Date, ioConnectorName: null, loadLastState: null,
+      stepStart: '2008-01-01 0:00:00'}
+canary workflows:
+  ALG1: &id001
+    MVNN_BED:
+      history window: 576
+      outlier threshold: 1.15
+      event threshold: 0.9
+      event timeout: 15
+      event window save: 30
+      BED: {window: 8, outlier probability: 0.5}
+data channels:
+  TEST_PRESS:
+    datachannels.SCADAChannel:
+      valid range: [-.inf, .inf]
+      precision: 0.001
+      parameter: PRESS
+      tag: TEST_OTL1_OPS_DHXX
+      name: TEST_PRESS
+      usage: op
+      className: datachannels.SCADAChannel
+      type:  'VALUE'
+      units: psi
+  TEST_TEMP:
+    datachannels.SCADAChannel:
+      valid range: [-.inf, .inf]
+      precision: 0.001
+      parameter: TEMP
+      tag: TEST_OTL1_OPS_TOPT
+      name: TEST_TEMP
+      usage: op
+      className: datachannels.SCADAChannel
+      type:  'VALUE'
+      units: deg C
+  TEST_PH:
+    datachannels.SCADAChannel:
+      valid range: [-.inf, .inf]
+      precision: 0.001
+      parameter: PH
+      tag: TEST_OTL1_H2O_PHXX
+      name: TEST_PH
+      usage: wq
+      className: datachannels.SCADAChannel
+      type:  'VALUE'
+      units: ''
+  TEST_CL2:
+    datachannels.SCADAChannel:
+      valid range: [-.inf, .inf]
+      precision: 0.01
+      parameter: CL2
+      tag: TEST_OTL1_H2O_TRCX
+      name: TEST_CL2
+      usage: wq
+      className: datachannels.SCADAChannel
+      type:  'VALUE'
+      units: mg/L
+  TEST_ALARM:
+    datachannels.SCADAChannel: {scope: TEST_OPT1_OPS_TOPT, parameter: TEMP, tag: TEST_OTL1_MON_TOPT,
+      name: TEST_ALARM, usage: alm, className: datachannels.SCADAChannel, value when active: 0,
+      type:  'VALUE'}
+  TEST_TURB:
+    datachannels.SCADAChannel:
+      valid range: [-.inf, .inf]
+      precision: 0.001
+      parameter: TURB
+      tag: TEST_OTL1_H2O_MTUR
+      name: TEST_TURB
+      usage: wq
+      className: datachannels.SCADAChannel
+      type:  'VALUE'
+      units: NTU
+  TEST_COND:
+    datachannels.SCADAChannel:
+      valid range: [-.inf, .inf]
+      precision: 0.001
+      parameter: COND
+      tag: TEST_OTL1_H2O_CDTY
+      name: TEST_COND
+      usage: wq
+      className: datachannels.SCADAChannel
+      type:  'VALUE'
+      units: '{\mu}S/cm'
+canary stations:
+  Big_Data_Test: &id002
+    Station:
+      enabled: true
+      inputs: [station1]
+      idNumberLocation: 1
+      channels: [TEST_TEMP, TEST_PRESS, TEST_CL2, TEST_PH, TEST_COND, TEST_TURB]
+      tagPrefix: station1
+      idNumberStation: 1
+      outputs: [files_out]
+      workflow:
+        ALG1: *id001
+connections:
+  Big_Data_Test: *id002
+  files_out:
+    text.CSVWriter:
+      type: FILE
+      location: Big_Test_Out_v5.csv
+      enabled: true
+      timestep options: {field: TIME_STEP}
+  station1:
+    text.CSVReaderWide:
+      type: csv
+      location: Big_Test.csv
+      enabled: true
+      stepField: TIME_STEP
+CANARY-EDS: 5

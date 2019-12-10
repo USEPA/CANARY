@@ -1,0 +1,51 @@
+deltas library:
+  m0 length: 5
+  m1 length: 5
+  separation min: 5
+  separation max: 10 
+
+pattern list:
+- name: "Pat1"
+  description: "Tutorial Pattern 1"
+  parameters: [ "CL2", "COND" ]
+  m0 length: 5
+  m1 length: 5
+  separation min: 7
+  separation max: 15 
+  # Starting values, or ~ if start values are irrelevant
+  starting values: ~ 
+  # Average delta changes for each parameter   
+  delta values: [ -0.37, 2.7314 ] 
+  num samples: 56
+  # If the deltas are absolute, omit or set the following two values to 1.0
+  delta mult min: 1.0
+  delta mult max: 1.0
+  delta mult var: 0.1
+  # If only the variances are necessary, a vector #Parameters long will do
+  # If a vector of twice the length of the parameters is passed, 
+  # it is assumed to be the upper-triangular shorthand
+  # representation of the Sigma matrix [ s11 s12 s13 s22 s23 s33 ]
+  # Remember these are VARIANCES, not standard deviations/errors!
+  variances: [ 0.0003 , 0.0047 ]
+- name: "Pat2"
+  description: "Tutorial Pattern 2"
+  parameters: [ "CL2", "COND" ]
+  m0 length: 5
+  m1 length: 5
+  separation min: 7
+  separation max: 15 
+  # Starting values, or ~ if start values are irrelevant
+  starting values: ~ 
+  # Average delta changes for each parameter   
+  delta values: [ 0.3589, -2.6118 ] 
+  num samples: 56
+  # If the deltas are absolute, omit or set the following two values to 1.0
+  delta mult min: 1.0
+  delta mult max: 1.0
+  delta mult var: 0.1
+  # If only the variances are necessary, a vector #Parameters long will do
+  # If a vector of twice the length of the parameters is passed, 
+  # it is assumed to be the upper-triangular shorthand
+  # representation of the Sigma matrix [ s11 s12 s13 s22 s23 s33 ]
+  # Remember these are VARIANCES, not standard deviations/errors!
+  variances: [ 0.0003 , 0.0088 ]

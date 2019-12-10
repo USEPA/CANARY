@@ -1,0 +1,142 @@
+#Large Dataset Data Analysis file - Created by JBB
+canary:
+  run mode: BATCH
+  control type: INTERNAL
+  control messenger: null
+  driver files: null
+
+timing options:
+  dynamic start-stop: off
+  date-time start: 2008-01-01 0:00:00
+  date-time stop: 2008-08-31 23:55:00
+  date-time format: yyyy-mm-dd HH:MM:SS
+  data interval: 00:05:00
+  message interval: 00:01:00
+
+data sources:
+- id: station1
+  type       : csv
+  location   : Big_Test.csv
+  enabled    : yes
+  timestep options:
+    field: "TIME_STEP"
+- id: files_out
+  type       : FILE
+  location   : Big_Test_Output.csv
+  enabled    : yes
+  timestep options:
+    field: "TIME_STEP"
+
+signals:
+- id: TEST_TEMP
+  SCADA tag: TEST_OTL1_OPS_TOPT
+  evaluation type: op
+  parameter type: TEMP
+  ignore changes: none
+  data options:
+    precision: 0.001
+    units: 'deg C'
+    valid range: [-.inf, .inf]
+
+- id: TEST_PRESS
+  SCADA tag: TEST_OTL1_OPS_DHXX
+  evaluation type: op
+  parameter type: PRESS
+  ignore changes: none
+  data options:
+    precision: 0.001
+    units: 'psi'
+    valid range: [-.inf, .inf]
+
+- id: TEST_CL2
+  SCADA tag: TEST_OTL1_H2O_TRCX
+  evaluation type: wq
+  parameter type: CL2
+  ignore changes: none
+  data options:
+    precision: 0.01
+    units: 'mg/L'
+    valid range: [-.inf, .inf]
+
+- id: TEST_PH
+  SCADA tag: TEST_OTL1_H2O_PHXX
+  evaluation type: wq
+  parameter type: PH
+  ignore changes: none
+  data options:
+    precision: 0.001
+    units: ''
+    valid range: [-.inf, .inf]
+
+- id: TEST_COND
+  SCADA tag: TEST_OTL1_H2O_CDTY
+  evaluation type: wq
+  parameter type: COND
+  ignore changes: none
+  data options:
+    precision: 0.001
+    units: '{\mu}S/cm'
+    valid range: [-.inf, .inf]
+
+- id: TEST_TURB
+  SCADA tag: TEST_OTL1_H2O_MTUR
+  evaluation type: wq
+  parameter type: TURB
+  ignore changes: none
+  data options:
+    precision: 0.001
+    units: 'NTU'
+    valid range: [-.inf, .inf]
+
+#- id: TEST_TURB2
+#  SCADA tag: TEST_OTL1_H2O_FTUR
+#  evaluation type: wq
+#  parameter type: TURB
+#  ignore changes: none
+#  data options:
+#    precision: 0.001
+#    units: 'NTU'
+#    valid range: [-.inf, .inf]
+
+- id: TEST_ALARM
+  SCADA tag: TEST_OTL1_MON_TOPT
+  evaluation type: alm
+  parameter type: TEMP
+  ignore changes: none
+  alarm options:
+    value when active: 0
+    scope: TEST_OTL1_H2O_TRCX
+
+algorithms:
+- id: ALG1
+  type: MVNN
+  history window: 576
+  outlier threshold: 1.15
+  event threshold: 0.9
+  event timeout: 15
+  event window save: 30
+  BED: 
+    window: 8
+    outlier probability: 0.5
+
+monitoring stations:
+- id: Big_Data_Test
+  station id number: 1
+  station tag name: station1
+  location id number: 1
+  enabled: yes
+  inputs:
+    - id: station1
+  outputs:
+    - id: files_out
+  signals: 
+    - id: TEST_TEMP
+    - id: TEST_PRESS
+    - id: TEST_CL2
+    - id: TEST_PH
+    - id: TEST_COND
+    - id: TEST_TURB
+    #- id: TEST_TURB2
+    #- id: TEST_ALARM
+  algorithms:
+    - id: ALG1

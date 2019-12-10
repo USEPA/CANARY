@@ -1,0 +1,149 @@
+--- # CANARY Config File
+# $Id: v5config.yml 4197 2014-02-21 21:03:06Z dbhart $
+CANARY-EDS: 5
+
+controllers:
+    canary-eds: 
+        controllers.Batch:
+            stepDynamic: false
+            stepSize: '00:20:00'
+            stepFinal: '03/06/2006 23:40:00'
+            pollRate: "00:00:01"
+            globalStepFormat: "MM/dd/yyyy HH:mm:ss"
+            globalDataStyle: "all"
+            stepType: date/time
+            stepStart: '02/21/2006 00:00:00'
+
+connections:
+    stationb_in:
+        text.CSVReaderWide:
+            location: Tutorial_Station_B.csv
+            enabled: true
+            use for: input
+            steps are synchronized: true
+            step field: timestep
+    stationb_out:
+        text.CSVWriter:
+            location: output.csv
+            useFor: output
+            stepsAreSynchronized: true
+            enabled: true
+    StationB:
+        Station:
+            enabled: true
+            tagPrefix: StationB
+            idNumberStation: 1
+            idNumberLocation: -1
+            inputs: [stationb_in]
+            channels: [TEST_CL, TTEST_PH, TEST_TEMP, TEST_TURB, TEST_TOC]
+            outputs: [stationb_out]
+            workflow:
+                test:
+                    MVNN_BED:
+                        history window: 144
+                        outlier threshold: 0.8
+                        event threshold: 0.85
+                        event timeout: 12
+                        event window save: 30
+                        BED: {window: 6.0, outlier probability: 0.5}
+data channels:
+    TEST_PRES_PLNT:
+        datachannels.SCADAChannel:
+            tag: B_PLNT_PRES_OP
+            name: TEST_PRES_PLNT
+            parameter: PRES
+            valid range: [-.inf, .inf]
+            precision: 0.4
+            usage: op
+            set points: [-.inf, .inf]
+            units: PSI
+    TEST_PRES:
+        datachannels.SCADAChannel:
+            tag: B_PRES_OP
+            parameter: PRES
+            valid range: [-.inf, .inf]
+            precision: 0.01
+            usage: op
+            set points: [-.inf, .inf]
+            units: PSI
+    TEST_FLOW_PLNT:
+        datachannels.SCADAChannel:
+            tag: B_PLNT_FLOW_OP
+            parameter: FLOW
+            valid range: [-.inf, .inf]
+            precision: 0.05
+            usage: op
+            set points: [-.inf, .inf]
+            units: gpm
+    TEST_CL:
+        datachannels.SCADAChannel:
+            tag: B_CL2_VAL
+            parameter: CL2
+            valid range: [-.inf, .inf]
+            precision: 0.0035
+            usage: wq
+            set points: [-.inf, .inf]
+            units: Mg/L
+    TEST_PH_PLNT:
+        datachannels.SCADAChannel:
+            tag: B_PLNT_PH_VAL
+            parameter: PH
+            valid range: [-.inf, .inf]
+            precision: 0.01
+            usage: wq
+            set points: [-.inf, .inf]
+            units: pH
+    TEST_PH:
+        datachannels.SCADAChannel:
+            tag: B_PH_VAL
+            parameter: PH
+            valid range: [-.inf, .inf]
+            precision: 0.01
+            usage: wq
+            set points: [-.inf, .inf]
+            units: pH
+    TEST_TURB:
+        datachannels.SCADAChannel:
+            tag: B_TURB_VAL
+            parameter: TURB
+            valid range: [-.inf, .inf]
+            precision: 0.01
+            usage: wq
+            set points: [-.inf, .inf]
+            units: NTU
+    TEST_CL_PLNT:
+        datachannels.SCADAChannel:
+            parameter: CL2
+            tag: B_PLNT_CL2_VAL
+            valid range: [-.inf, .inf]
+            precision: 0.0035
+            usage: wq
+            set points: [-.inf, .inf]
+            units: Mg/L
+    TEST_TURB_PLNT:
+        datachannels.SCADAChannel:
+            parameter: TURB
+            tag: B_PLNT_TURB_VAL
+            valid range: [-.inf, .inf]
+            precision: 0.01
+            usage: wq
+            set points: [-.inf, .inf]
+            units: NTU
+    TEST_TEMP:
+        datachannels.SCADAChannel:
+            parameter: TEMP
+            tag: B_TEMP_VAL
+            valid range: [32, .inf]
+            precision: 0.1
+            usage: op
+            set points: [-.inf, .inf]
+            units: ^oF
+    TEST_TOC:
+        datachannels.SCADAChannel:
+            parameter: TOC
+            tag: B_TOC_VAL
+            valid range: [-.inf, .inf]
+            precision: 0.01
+            usage: wq
+            set points: [-.inf, .inf]
+            units: ppb

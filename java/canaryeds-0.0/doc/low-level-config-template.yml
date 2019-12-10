@@ -1,0 +1,47 @@
+--- 
+# CanaryEDS 5.0 Station Configuration (for Low-level API implementations)
+<station name>:
+    Station:
+        stepConfig:
+            # Step options need to be specified here, since there is no 
+            # controller specified using this method. Valid values for the
+            # <Step class name> are: DateTimeStep, IntegerStep, or 
+            # DoubleStep, or a fully qualified class name for a class that
+            # implements the gov.sandia.seme.framework.Step interface.
+            <Step class name>: 
+                stepSize:   '00:20:00'
+                stepFormat: "MM/dd/yyyy HH:mm:ss"
+                stepStart:  '02/21/2006 00:00:00'
+        dataStyle: all
+        enabled: true
+        tagPrefix: StationB
+        idNumberStation: 1
+        idNumberLocation: -1
+        channels: 
+            # Instead of a list of channel names, the full channel descriptor
+            # information must be provided here, just as if it were in the
+            # data channels section of a typical CanaryEDS configuration file.
+            # Remember that channel names must be unique within the Station.
+            <channel 1 name>:
+                <DataChannel class name>:
+                    <option 1.1 tag>: <option 1.1 value>
+                    <option 1.2 tag>: <option 1.2 value>
+                    # ... as many options as appropriate
+            <channel 2 name>:
+                <DataChannel class name>:
+                    <option 2.1 key>: <option 2.1 value>
+                    <option 2.2 key>: <option 2.2 value>
+                    # ... as many options as appropriate
+            # ... as many channels as necessary
+        inputs: null
+        outputs: null
+        # inputs and outputs should be null, since the developer is providing data value
+        # messages using direct calls to the station’s inbox Queue.
+        workflow:
+            <workflow name>:	
+                <Workflow class name>:
+                    <option 1 key>: <option 1 value>
+                    <option 2 key>: <option 2 value>
+                    # ... as many options as appropriate
+            # ... multiple workflow definitions can be specified
+# ... multiple station entries can be specified in one file, but station names must be unique

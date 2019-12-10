@@ -1,0 +1,111 @@
+/**
+\page userConfigfile The CANARY-EDS Configuration File
+
+
+
+
+
+
+
+
+
+
+
+\section userGlobal The ``global'' Configuration File Section
+
+\section userControllers The ``controllers'' Configuration File Section
+
+The following sections describe the controllers that are built-in to 
+CANARY-EDS 5.0: \ref userDetControllers
+
+\section userConnections The ``connections'' Configuration File Section
+
+The following sections describe the CSV/text-file readers and writers which 
+are built in to CANARY-EDS 5.0: \ref userDetConnections
+
+\section userDataChannels The ``data channels'' Configuration File Section
+
+The following sections describe the data channels that are built-in to 
+CANARY-EDS 5.0: \ref userDetDataChannels
+
+\section userWorkflows The ``canary workflows'' Configuration File Section
+
+The following sections describe the workflows that run event detection 
+algorithms which are built in to CANARY-EDS 5.0: \ref userDetWorkflows
+
+\section userEventIdentifiers The ``canary event identifiers'' Configuration File Section
+
+The following sections describe the event identifiers that run pattern matching 
+algorithms that are built in to CANARY-EDS 5.0: \ref userDetEventIdentifiers
+
+\section userStations The ``canary stations'' Configuration File Section
+
+``canary stations'' or the ``connections'' section of the configuration file. 
+However, this also means that the I/O connection objects and the monitoring 
+station objects must have names that are unique to both sets.
+
+\ref userDetStations
+
+*/
+
+/**
+\page userConfigDetails Component Configuration Details
+This chapter describes each of the built-in CANARY-EDS components, when to use
+them, and what their options are. The chapter contents are as follows:
+ - \subpage userDetControllers
+   - \ref userBatch
+   - \ref userInternalClock
+   - \ref userSingleStep
+ - \subpage userDetConnections
+   - \ref userCSVReaderWide
+   - \ref userCSVReaderTall
+   - \ref userCSVWriter
+ - \subpage userDetDataChannels
+   - \ref userSCADAChannel
+ - \subpage userDetWorkflows
+   - \ref userLPCF_BED
+   - \ref userMVNN_BED
+   - \ref userSetPointProximity
+   - \ref userV4External
+ - \subpage userDetEventIdentifiers
+   - \ref userDeltaMatch
+ - \subpage userDetStations
+   - \ref userStationDet
+*/
+
+/**
+\page userDetControllers Controllers
+ - \subpage userBatch
+ - \subpage userInternalClock
+ - \subpage userSingleStep
+*/
+
+/**
+\page userDetConnections I/O Connections
+ - \subpage userCSVReaderWide
+ - \subpage userCSVReaderTall
+ - \subpage userCSVWriter
+*/
+
+/**
+\page userDetDataChannels Data Channels
+ - \subpage userSCADAChannel
+*/
+
+/**
+\page userDetWorkflows Algorithm Workflows
+ - \subpage userLPCF_BED
+ - \subpage userMVNN_BED
+ - \subpage userSetPointProximity
+ - \subpage userV4External
+*/
+
+/**
+\page userDetEventIdentifiers Event Identifiers
+ - \subpage userDeltaMatch
+*/
+
+/**
+\page userDetStations Monitoring Stations
+ - \subpage userStationDet
+*/

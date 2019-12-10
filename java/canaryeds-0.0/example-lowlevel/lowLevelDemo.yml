@@ -1,0 +1,132 @@
+--- 
+# CanaryEDS 5.0 Station Configuration Demo (for Low-level API implementations)
+demoStation1:
+    Station:
+        stepConfig:
+            # Step options need to be specified here, since there is no 
+            # controller specified using this method. 
+            DateTimeStep: 
+                stepSize:   '00:05:00'
+                stepFormat: "MM/dd/yyyy HH:mm:ss"
+                stepStart:  '02/21/2006 00:00:00'
+        dataStyle: all
+        enabled: true
+        tagPrefix: stn1
+        idNumberStation: 1
+        idNumberLocation: 1
+        channels: 
+            # Instead of a list of channel names, the full channel descriptor
+            # information must be provided here, just as if it were in the
+            # data channels section of a typical CanaryEDS configuraiton file.
+            # Remember that channel names must be unique within the Station.
+            demoChannel1:
+                datachannels.SCADAChannel:
+                    tag: demoChannel1
+                    parameter: PRES
+                    valid range: [-.inf, .inf]
+                    precision: 0.4
+                    usage: op
+                    set points: [-.inf, .inf]
+                    units: PSI
+            demoChannel2:
+                datachannels.SCADAChannel:
+                    tag: demoChannel2
+                    parameter: CL2
+                    valid range: [-.inf, .inf]
+                    precision: 0.0035
+                    usage: wq
+                    set points: [-.inf, .inf]
+                    units: Mg/L
+            demoChannel3:
+                datachannels.SCADAChannel:
+                    tag: demoChannel3
+                    parameter: PH
+                    valid range: [-.inf, .inf]
+                    precision: 0.01
+                    usage: wq
+                    set points: [-.inf, .inf]
+                    units: pH
+            demoChannel4:
+                datachannels.SCADAChannel:
+                    tag: demoChannel4
+                    parameter: TURB
+                    valid range: [-.inf, .inf]
+                    precision: 0.01
+                    usage: wq
+                    set points: [-.inf, .inf]
+                    units: NTU
+        inputs: ~
+        outputs: ~
+        # inputs and outputs should be null, since the developer is providing
+        # messages using direct calls to the station.
+        workflow:
+            demoMVNN:
+                MVNN_BED:
+                    history window: 90
+                    outlier threshold: 0.8
+                    event threshold: 0.9
+                    event timeout: 12.0
+                    event window save: 30.0
+                    BED: {window: 6.0, outlier probability: 0.5}
+# Now another station that is the same except for the workflow so that we have
+# a demo with two stations.
+demoStation2:
+    Station:
+        stepConfig:
+            DateTimeStep: 
+                stepSize:   '00:01:00'
+                stepFormat: "MM/dd/yyyy HH:mm:ss"
+                stepStart:  '02/21/2006 00:00:00'
+        dataStyle: all
+        enabled: true
+        tagPrefix: stn2
+        idNumberStation: 2
+        idNumberLocation: 2
+        channels: 
+            demoChannel1:
+                datachannels.SCADAChannel:
+                    tag: demoChannel1
+                    parameter: PRES
+                    valid range: [-.inf, .inf]
+                    precision: 0.4
+                    usage: op
+                    set points: [-.inf, .inf]
+                    units: PSI
+            demoChannel2:
+                datachannels.SCADAChannel:
+                    tag: demoChannel2
+                    parameter: CL2
+                    valid range: [-.inf, .inf]
+                    precision: 0.0035
+                    usage: wq
+                    set points: [-.inf, .inf]
+                    units: Mg/L
+            demoChannel3:
+                datachannels.SCADAChannel:
+                    tag: demoChannel3
+                    parameter: PH
+                    valid range: [-.inf, .inf]
+                    precision: 0.01
+                    usage: wq
+                    set points: [-.inf, .inf]
+                    units: pH
+            demoChannel4:
+                datachannels.SCADAChannel:
+                    tag: demoChannel4
+                    parameter: TURB
+                    valid range: [-.inf, .inf]
+                    precision: 0.01
+                    usage: wq
+                    set points: [-.inf, .inf]
+                    units: NTU
+        inputs: ~
+        outputs: ~
+        workflow:
+            demoLPCF:
+                LPCF_BED:
+                    history window: 90.0
+                    outlier threshold: 0.8
+                    event threshold: 0.9
+                    event timeout: 12.0
+                    event window save: 30.0
+                    BED: {window: 6.0, outlier probability: 0.5}

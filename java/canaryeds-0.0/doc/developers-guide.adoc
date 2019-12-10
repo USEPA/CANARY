@@ -1,0 +1,62 @@
+Developer's Guide to CanaryEDS 5.0
+==================================
+David B. Hart <dbhart@sandia.gov>
+v5.0-beta, 2014-05
+
+
+//This is the optional preamble (an untitled section body). Useful for
+//writing simple sectionless documents consisting only of a preamble.
+//
+//NOTE: The abstract, preface, appendix, bibliography, glossary and
+//index section titles are significant ('specialsections').
+
+
+:numbered!:
+[abstract]
+The new CanaryEDS version 5.0 library and executable program are written in the
+Java programming language. There are both low- and high-level APIs available to
+integrate CanaryEDS into an existing program. There is also a standalone program
+that provides end-user capability. The standalone program _does not_ fully 
+implement every feature of CANARY-EDS 4.3. This document provides guidance and
+examples on integrating and using CanaryEDS 5.0 library functions into a working
+program.
+
+:numbered:
+
+Introduction
+------------
+This is an introduction.
+
+
+
+Running Standalone Mode
+-----------------------
+Running
+
+
+
+High-level API
+--------------
+The high-level API
+
+
+Low-level API
+-------------
+The low level API example is provided in the project example-lowlevel. This project uses a configuration file called lowLevelDemo.yml to create and configure two Station objects. The stations are then fed 200 steps of random data, and the contents of the results messages are displayed to the user at each step. A radical change will occur in two of the data channels at step 101 that will produce an event that will have visible impact of the results messages. At the end of the run, the EventRecord objects are retrieved from each station and displayed to the user. In addition, the loggers are set to the most verbose level possible to ensure that all output is presented and preserved for testers who want to see exactly what is going on. 
+The configuration object must be a Mapping with root-level keys that are the station names. An example template of a YAML file that contains the definition for a single Station is presented below. Note that the strings in bold, italic font and enclosed by <arrow brackets> indicate template variables that need to be replaced with proper values. String values are presented in green, keys are presented in blue. Comments start with a #-symbol, and are italicized.
+
+--------------------------------------------------------------------------------
+\include::low-level-config-template.yml
+--------------------------------------------------------------------------------
+
+
+
+ifdef::backend-docbook[]
+[index]
+Example Index
+-------------
+////////////////////////////////////////////////////////////////
+The index is normally left completely empty, it's contents being
+generated automatically by the DocBook toolchain.
+////////////////////////////////////////////////////////////////
+endif::backend-docbook[]

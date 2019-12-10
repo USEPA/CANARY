@@ -1,0 +1,62 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.canaryeds</groupId>
+        <artifactId>org-canaryeds</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <name>canaryeds-base</name>
+    <groupId>org.canaryeds</groupId>
+    <artifactId>canaryeds-base</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <ciManagement>
+        <system>hudson</system>
+        <url>https://jenkins.sandia.gov/job/canaryeds-base_trunk/</url>
+    </ciManagement>
+
+    <properties>
+        <canaryeds.buildYear>2013</canaryeds.buildYear>
+        <canaryeds.copyright>Copyright ${project.inceptionYear}-${canaryeds.buildYear} ${project.organization.name}\n${canaryeds.DOEstatement}</canaryeds.copyright>
+        <canaryeds.DOEstatement>Under the terms of Contract DE-AC04-94AL85000 with Sandia Corporation,\nthe U.S. Government retains certain rights in this software.</canaryeds.DOEstatement>
+        <canaryeds.sourceRev>Source rev. ${env.SVN_REVISION}</canaryeds.sourceRev>
+        <canaryeds.buildNumber>Build ${env.BUILD_ID} ${env.BUILD_TAG}</canaryeds.buildNumber>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.3.2</version>
+                <configuration>
+                    <archive>
+                        <manifestSections>
+                            <manifestSection>
+                                <name>Debug-Details</name>
+                                <manifestEntries>
+                                    <SCM-Source-Revision>${scm.sourceRev}</SCM-Source-Revision>
+                                    <CI-Build-Tag>${ci.buildTag}</CI-Build-Tag>
+                                    <CI-Build-Number>${ci.buildNumber}</CI-Build-Number>
+                                    <CI-Build-Url>${ci.buildUrl}</CI-Build-Url>
+                                    <CI-Job-Name>${ci.jobName}</CI-Job-Name>
+                                </manifestEntries>
+                            </manifestSection>
+                        </manifestSections>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+    <dependencies>
+        <dependency>
+            <groupId>gov.sandia.seme</groupId>
+            <artifactId>seme-framework</artifactId>
+            <version>1.0</version>
+        </dependency>
+    </dependencies>
+</project>

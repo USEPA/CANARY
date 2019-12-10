@@ -1,0 +1,78 @@
+% Shortcuts for SeMe information incorporated in multiple versions of manuals
+%
+% This file is includeded in all top-level .tex files
+
+% When using this command, likely follow with a forced space, e.g., one of
+% Version \SeMeVersion\ Manual
+% Version \SeMeVersion\space Manual
+% Version \SeMeVersion{} Manual
+\newcommand{\SeMeVersion}{1.0}
+%%\newcommand{\SeMeVersion}{5.0+}
+
+
+% Most recent SAND report numbers and report date based on
+% Data should be SAND report date and not reflect updates
+\newcommand{\SeMeSANDDate}{March 2014}
+\newcommand{\SeMeSANDDev}{SAND2014-xxxx}
+\newcommand{\SeMeSANDRef}{SAND2014-xxxx}
+\newcommand{\SeMeSANDUsers}{SAND2014-xxxx}
+\newcommand{\SeMeSANDTheory}{SAND2014-xxxx}
+
+
+% Need to manually break line or Eldred gets incorrectly split
+\newcommand{\SeMeAuthorSAND}{
+David~B.~Hart, Nathanael~P.~Rackley
+}
+
+\newcommand{\SeMeAuthorLong}{
+David~B.~Hart, Nathanael~P.~Rackley\\
+Geochemistry Department\\
+\\
+Sandia National Laboratories\\
+P.O. Box 5800\\
+Albuquerque, NM 87185
+}
+
+\newcommand{\SeMeAuthorFormatted}{
+{\large \bf David B. Hart, Nathanael P. Rackley}\\ 
+{\large Geochemistry Department}\\
+\vspace*{0.5cm}
+{\large Sandia National Laboratories}\\
+{\large P.O. Box 5800}\\
+{\large Albuquerque, New Mexico 87185}\\
+}
+
+
+% Fragments which together comprise abstracts
+
+\newcommand{\SeMeAbstractShared}{
+
+% blank line intended
+
+% blank line intended
+}
+
+\newcommand{\SeMeAbstractDev}{
+This report serves as a developers manual for the SeMe Framework and
+describes the SeMe Framework class hierarchies and their interrelationships.
+It derives directly from annotation of the source code and provides
+detailed class documentation, including all member functions and
+attributes.  
+}
+
+\newcommand{\SeMeAbstractRef}{
+This report serves as a reference manual for the commands specification
+for the SeMe Framework, providing input overviews, option descriptions,
+and example specifications.
+}
+
+\newcommand{\SeMeAbstractUsers}{
+This report serves as a user's manual for the SeMe Framework and
+provides capability overviews and procedures for software execution,
+as well as a variety of example studies.
+}
+
+\newcommand{\SeMeAbstractTheory}{
+This report serves as a theoretical manual for selected algorithms
+implemented within the SeMe Framework.
+}

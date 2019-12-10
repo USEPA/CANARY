@@ -1,0 +1,71 @@
+/**
+\if (doxyCanaryMain && doxyDev)
+
+\mainpage Introduction
+
+\htmlonly
+\image html logo_halfsize.jpg
+\author David B. Hart, Nathanael P. Rackley
+\tableofcontents
+\endhtmlonly
+
+The %CANARY-EDS (Continuous Analysis of Networked Array of Sensors 
+for Event Detection) software was written to perform event detection
+on drinking water quality data. It is based on statistical and signal
+processing algorithms which analyze data collected from water quality
+sensors, such as chlorine level, pH, conductivity, etc. These data
+come from a network of sensors placed at remote locations.
+
+Though targeted for the water industry, the generic approaches taken
+can be used for any time-series quality data. The reason that the 
+core %CANARY algorithms are generic is due to some of the quirks of 
+the water industry -- there are lots of water quality sensors on the
+market, and a single utility may use many different types of sensors
+from different manufacturers based on location, budget, and age. 
+%CANARY's algorithms are designed to work even if there is no prior
+knowledge as to what type of sensors are available.
+
+The downside to having generic algorithms is that they are not as good
+as highly specific algorithms that can make use of extra domain 
+knowledge. To this end, CANARY-EDS version 4 began making extensions
+available where other parties could write their own algorithms and
+plug them in to %CANARY. The version 5 update to %CANARY-EDS expands
+this plug-in framework to allow writing custom input and output 
+drivers as well as custom algorithms, and it also transitions %CANARY
+to a fully Java-based toolkit. By moving to pure Java, %CANARY-EDS
+can now be called within other software as a library, making use
+of the event detection services without having to launch a separate,
+heavy process the way version 4 required.
+
+The Developers Manual focuses on documentation of %CANARY design
+principles and class structures; it derives principally from annotated
+source code. 
+<a href="../html-user/index.html">Reference Manual</a>, and for more
+details on %CANARY features and capabilities, refer to the 
+CANARY Version 4.3 Users Guide \cite{epa2012}.
+
+\section DevOverview Overview of CANARY-EDS
+
+The CANARY-EDS software is written in Java.
+
+\todo add generic CANARY-EDS overview here
+
+\section DevGuidance Development Practices and Guidance
+
+The following links provide guidance for core software components or 
+specific development activities:
+
+\todo add links to various chapters here
+
+\section DevAddtnl Additional Resources
+
+Additional development resources include:
+
+\li Project web pages are maintained at http://software.sandia.gov/trac/canary
+    including links to frequently asked questions, documentation, publications,
+	mailing lists, and other resources.
+
+
+
+\endif
+*/

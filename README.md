@@ -7,7 +7,7 @@ and is known as setup-4.3.3.exe.
 Documentation
 ------------
 
-For the CANARY user manual and other documentation, please visit: https://cfpub.epa.gov/si/si_public_record_report.cfm&dirEntryId=253555
+For the CANARY user manual and other documentation, please visit: https://cfpub.epa.gov/si/si_public_record_report.cfm?Lab=NHSRC&dirEntryId=253555
 
 License
 ------------
